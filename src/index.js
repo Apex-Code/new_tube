@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import '../config.js';
+import SearchBar from './components/search_bar';
 
-const API_KEY = YouTube_Api;
+const API_KEY = 'AIzaSyBQ8d7_ZpZQLwCUH5jCCaAinmoQLUwIt6Q';
 
 const App = () => {
-    return <div>Hello World!</div>;
+    return <div>
+        <SearchBar/>
+    </div>;
 }
 
 ReactDOM.render(<App />, document.querySelector('.container'));
