@@ -7,27 +7,31 @@ import VideoDetail from './components/video_detail';
 const API_KEY = 'AIzaSyBQ8d7_ZpZQLwCUH5jCCaAinmoQLUwIt6Q';
 
 class App extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
             videos: [],
             selectedVideo: null
         };
-
-        YTSearch({ key: API_KEY, term: 'Warcraft'},  (videos) => {
-            this.setState({
-                videos: videos,
-                selectedVideo: videos[0]
-            });
-        });
+        this.videoSearch('skater')
     }
+
+    videoSearch(term){
+            YTSearch({ key: API_KEY, term: term},  (videos) => {
+                this.setState({
+                    videos: videos,
+                    selectedVideo: videos[0]
+                });
+            });
+        }
+
 
     render()
     {
         return(
         <div>
-            <SearchBar/>
+            <SearchBar onSearchTermChange={term => this.videoSearch(term)}/>
             <VideoDetail video={this.state.selectedVideo}/>
             <VideoList
                 onVideoSelect = {selectedVideo => this.setState({selectedVideo})}
@@ -35,7 +39,7 @@ class App extends Component {
 
         </div>
         );
-    }
+    };
 }
 
 ReactDOM.render(<App />, document.querySelector('.container'));
